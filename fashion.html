@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favi.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favi.webp" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="category.css">
@@ -12,7 +12,7 @@
   <title>The Art of Fashion</title>
   <style>
     body { background-color: #f8b5b5; color: #333; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .container { max-width: 900px; margin: 40px auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+    .container { max-width: 900px; margin: 40px auto; margin-top: 10rem; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
     h1 { color: #d9534f; text-align: center; }
     p, h2 { line-height: 1.6; }
     img { width: 100%; border-radius: 10px; margin: 20px 0; }
@@ -80,7 +80,7 @@ body.dark-mode .footer {
     });
     </script>
     
-    <header>
+    <header style="top: -4rem ;">
     
     
     
@@ -94,7 +94,7 @@ body.dark-mode .footer {
         <a href="blog.html">Leading Blog</a>
         <a href="start_writing.html">Start Writing</a>
         <a href="category.html">Categories</a>
-        <a href="about.html">About</a>
+
         <a href="contact_us.html">Contact Us</a>
         <a href="contact_us.html">Give Feedback</a>
     </div>
@@ -287,7 +287,7 @@ body.dark-mode .footer {
                         <article class="article">
                             <div class="d-flex ">
                                 <a class="d-flex" href="#">
-                                    <img src="./assets/img9.jpg" class="object-fit" alt="">
+                                    <img src="./assets/img9.webp" class="object-fit" alt="">
                                     <div class="px-1" style="width: 300px;">
                                         <a href="#" class="text-title display-2 text-dark">
                                             Embrace the beauty of nature through our enchanting blog, where we
@@ -305,7 +305,7 @@ body.dark-mode .footer {
                         <article class="article">
                             <div class="d-flex">
                                 <a class="d-flex" href="#">
-                                    <img src="./assets/img1.jpg" class="object-fit" alt="">
+                                    <img src="./assets/img1.webp" class="object-fit" alt="">
                                     <div class="px-1" style="width: 300px;">
                                         <a href="#" class="text-title display-2 text-dark">
                                             Embark on unforgettable journeys through our travel blog, where
@@ -323,7 +323,7 @@ body.dark-mode .footer {
                         <article class="article">
                             <div class="d-flex">
                                 <a class="d-flex" href="#">
-                                    <img src="./assets/img2.jpg" class="object-fit" alt="">
+                                    <img src="./assets/img2.webp" class="object-fit" alt="">
                                     <div class="px-1" style="width: 300px;">
                                         <a href="#" class="text-title display-2 text-dark">
                                             Gaming Adventures Unleashed
@@ -376,6 +376,55 @@ body.dark-mode .footer {
         </div>
     </div>
 </footer>
+<div id="back-to-top" class="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <style>
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+
+  <script>
+    const backToTopButton = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    });
+
+    backToTopButton.addEventListener('click', ()=>{
+      window.scrollTo({
+        top: 0,
+        behavior:'smooth'
+      });
+    });
+  </script>
+
 
 </body>
 </html>

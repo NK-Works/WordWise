@@ -1,42 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sendEmailButton = document.getElementById("sendEmailButton"); // Assuming your button has this ID
+  const sendEmailButton = document.getElementById("sendEmailButton");
 
   sendEmailButton.addEventListener("click", SendEmail);
 });
 
+const trustedDomains = [
+  'gmail.com',
+  'outlook.com',
+  'yahoo.com',
+  'protonmail.com',
+  'icloud.com',
+  'tutanota.com',
+  'hotmail.com',
+  'live.com',
+  'mail.com',
+  'zoho.com',
+  'gmx.com',
+  'aol.com',
+  'fastmail.com',
+  'yandex.com',
+  '*.edu',
+  '*.ac.uk',
+  '*.edu.in',
+  '*.edu.au',
+  'examplecompany.com',
+  'mailfence.com',
+  'posteo.de',
+  'runbox.com'
+];
+
+// Email validation function to check format and domain
+function ValidateTrustEmail(email) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format validation
+  const domain = email.split('@')[1];
+
+  return (
+    emailPattern.test(email) && 
+    trustedDomains.some((trusted) => 
+      trusted.includes('*') ? domain.endsWith(trusted.slice(1)) : domain === trusted
+    )
+  );
+}
+
 async function SendEmail(event) {
   event.preventDefault();
 
-  const firstName = document.getElementById("firstName").value.trim();
-  const lastName = document.getElementById("lastName").value.trim();
-  const email = document.getElementById("email").value.trim();
+  const Name = document.getElementById("Name").value.trim();
+  const email = document.getElementById("email2").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const message = document.getElementById("message").value.trim();
 
   // Input validation
-  if (!firstName || !lastName || !email || !phone || !message) {
+  if (!Name || !email || !phone || !message) {
     alert("All fields are required.");
     return;
   }
 
-  if (!validateEmail(email)) {
-    alert("Please enter a valid email address.");
+  if (!ValidateTrustEmail(email)) {
+    alert("Please enter a valid email address from a trusted provider.");
     return;
   }
-
-  console.log(Name,email,phone,message);
 
   if (message.length < 10) {
     alert("Message must be at least 10 characters long.");
     return;
   }
-  //console.log("Email value:", email , Name, phone, message); 
-  const data = {
-    Name: Name,
-    email: email,
-    phone: phone,
-    message: message,
-  };
+
+  const data = { Name, email, phone, message };
 
   try {
     const response = await fetch("http://127.0.0.1:3000/send-email", {
@@ -46,14 +76,13 @@ async function SendEmail(event) {
     });
 
     const result = await response.json();
-    
+
     if (response.ok) {
       showPopup();
       document.getElementById("contactForm").reset();
     } else {
       handleErrorResponse(result);
     }
-    
   } catch (error) {
     console.error("Error sending email:", error);
     alert("Error sending email. Please try again later.");
